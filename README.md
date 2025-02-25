@@ -1,4 +1,6 @@
-# Compiladores 2025/1
+# Universidade de Passo Fundo
+## Curso de Ciência da Computação
+### Compiladores 2025/1
 
-Códigos das aulas de Compiladores no curso de Ciência da Computação
-Universidade de Passo Fundo
+Arquivos das aulas práticas
+
