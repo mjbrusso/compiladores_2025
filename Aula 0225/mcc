@@ -1,0 +1,2 @@
+#!/bin/bash
+clang -DFILENAME=\"$1\" template.c 

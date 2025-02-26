@@ -1,0 +1,44 @@
+digraph AST {
+    node [shape=box, fontname="Courier"];
+
+    // Nós
+    "node_6170e96a2058" [label="FunctionDecl\n0x6170e96a2058\n<foo.c:5:1, line:10:1>\nline:5:5 foo 'int (int)'"];
+    "node_6170e96a1f80" [label="ParmVarDecl\n0x6170e96a1f80\n<col:9, col:13>\ncol:13 used n 'int'"];
+    "node_6170e96a2320" [label="CompoundStmt\n0x6170e96a2320\n<col:15, line:10:1>"];
+    "node_6170e96a22f0" [label="IfStmt\n0x6170e96a22f0\n<line:6:5, line:3:21>\nhas_else"];
+    "node_6170e96a21a8" [label="BinaryOperator\n0x6170e96a21a8\n<line:6:8, col:10>\n'int' '<'"];
+    "node_6170e96a2190" [label="ImplicitCastExpr\n0x6170e96a2190\n<col:8>\n'int' <LValueToRValue>"];
+    "node_6170e96a2150" [label="DeclRefExpr\n0x6170e96a2150\n<col:8>\n'int' lvalue ParmVar 0x6170e96a1f80 'n' 'int'"];
+    "node_6170e96a2170" [label="IntegerLiteral\n0x6170e96a2170\n<col:10>\n'int' 0"];
+    "node_6170e96a2218" [label="ReturnStmt\n0x6170e96a2218\n<line:7:9, col:17>"];
+    "node_6170e96a2200" [label="UnaryOperator\n0x6170e96a2200\n<col:16, col:17>\n'int' prefix '-'"];
+    "node_6170e96a21e8" [label="ImplicitCastExpr\n0x6170e96a21e8\n<col:17>\n'int' <LValueToRValue>"];
+    "node_6170e96a21c8" [label="DeclRefExpr\n0x6170e96a21c8\n<col:17>\n'int' lvalue ParmVar 0x6170e96a1f80 'n' 'int'"];
+    "node_6170e96a22e0" [label="ReturnStmt\n0x6170e96a22e0\n<line:9:9, line:3:21>"];
+    "node_6170e96a22c0" [label="BinaryOperator\n0x6170e96a22c0\n<line:9:16, line:3:21>\n'int' '*'"];
+    "node_6170e96a2280" [label="BinaryOperator\n0x6170e96a2280\n<line:9:16, col:20>\n'int' '*'"];
+    "node_6170e96a2268" [label="ImplicitCastExpr\n0x6170e96a2268\n<col:16>\n'int' <LValueToRValue>"];
+    "node_6170e96a2228" [label="DeclRefExpr\n0x6170e96a2228\n<col:16>\n'int' lvalue ParmVar 0x6170e96a1f80 'n' 'int'"];
+    "node_6170e96a2248" [label="IntegerLiteral\n0x6170e96a2248\n<col:20>\n'int' 73"];
+    "node_6170e96a22a0" [label="IntegerLiteral\n0x6170e96a22a0\n<line:3:21>\n'int' 9"];
+
+    // Conexões (arestas)
+    "node_6170e96a2058" -> "node_6170e96a1f80";
+    "node_6170e96a2058" -> "node_6170e96a2320";
+    "node_6170e96a2320" -> "node_6170e96a22f0";
+    "node_6170e96a22f0" -> "node_6170e96a21a8";
+    "node_6170e96a22f0" -> "node_6170e96a2218";
+    "node_6170e96a22f0" -> "node_6170e96a22e0";
+    "node_6170e96a21a8" -> "node_6170e96a2190";
+    "node_6170e96a21a8" -> "node_6170e96a2170";
+    "node_6170e96a2190" -> "node_6170e96a2150";
+    "node_6170e96a2218" -> "node_6170e96a2200";
+    "node_6170e96a2200" -> "node_6170e96a21e8";
+    "node_6170e96a21e8" -> "node_6170e96a21c8";
+    "node_6170e96a22e0" -> "node_6170e96a22c0";
+    "node_6170e96a22c0" -> "node_6170e96a2280";
+    "node_6170e96a22c0" -> "node_6170e96a22a0";
+    "node_6170e96a2280" -> "node_6170e96a2268";
+    "node_6170e96a2280" -> "node_6170e96a2248";
+    "node_6170e96a2268" -> "node_6170e96a2228";
+}
