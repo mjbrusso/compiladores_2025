@@ -1,0 +1,5 @@
+total 76
+-rwxrwxr-x 1 mjb mjb 27096 Mar 11 20:19 a.out
+-rw-rw-r-- 1 mjb mjb     0 Mar 11 20:22 arq.txt
+-rw-rw-r-- 1 mjb mjb    65 Mar 11 20:11 f01.l
+-rw-rw-r-- 1 mjb mjb 43856 Mar 11 20:18 lex.yy.c
