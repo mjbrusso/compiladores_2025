@@ -8,6 +8,7 @@
 [a-zA-ZÀ-ÿ]+    {printf("%d: %s\n", yylineno, yytext); }
 \n      ;
 .       ;
+
 %%
 
 int yywrap(){
