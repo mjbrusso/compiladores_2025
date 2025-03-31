@@ -10,5 +10,4 @@ Some of the code, documents, and content on this repository were created with th
 
 ## License
 
-Code released under the MIT License. Docs released under Creative Commons.
 Code released is under [MIT license](https://github.com/mjbrusso/audioplayer/blob/master/LICENSE). Docs released under [Creative Commons] (https://creativecommons.org/licenses/by/3.0/).
