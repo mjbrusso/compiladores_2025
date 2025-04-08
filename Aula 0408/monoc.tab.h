@@ -75,10 +75,10 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 16 "monoc.y"
+#line 19 "monoc.y"
 
     int ival;
-    char *sval;
+    SymtabEntry *sval;
 
 #line 84 "monoc.tab.h"
 

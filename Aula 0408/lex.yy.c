@@ -485,13 +485,15 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "monoc.l"
 #line 2 "monoc.l"
+#include "symtab.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "monoc.tab.h"
 
-#line 494 "lex.yy.c"
-#line 495 "lex.yy.c"
+extern Symtab *ts; 
+#line 496 "lex.yy.c"
+#line 497 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -708,9 +710,9 @@ YY_DECL
 		}
 
 	{
-#line 11 "monoc.l"
+#line 13 "monoc.l"
 
-#line 714 "lex.yy.c"
+#line 716 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -779,78 +781,79 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 12 "monoc.l"
+#line 14 "monoc.l"
 ; /* Ignora comentários de linha */ 
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 13 "monoc.l"
+#line 15 "monoc.l"
 ; /* Ignora espaços em branco e tabulações */
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 14 "monoc.l"
+#line 16 "monoc.l"
 { yylval.ival = atoi(yytext); return INTLITERAL; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 15 "monoc.l"
+#line 17 "monoc.l"
 { return SEMICOLON; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 16 "monoc.l"
+#line 18 "monoc.l"
 { return PRINT; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 17 "monoc.l"
+#line 19 "monoc.l"
 { return LPAREN; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 18 "monoc.l"
+#line 20 "monoc.l"
 { return RPAREN; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 19 "monoc.l"
+#line 21 "monoc.l"
 { return PLUS; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 20 "monoc.l"
+#line 22 "monoc.l"
 { return MINUS; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 21 "monoc.l"
+#line 23 "monoc.l"
 { return TIMES; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 22 "monoc.l"
+#line 24 "monoc.l"
 { return DIVIDE; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 23 "monoc.l"
+#line 25 "monoc.l"
 { return VARDEF; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 24 "monoc.l"
+#line 26 "monoc.l"
 { return READ; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 25 "monoc.l"
-{ yylval.sval = strdup(yytext); return IDENT; }
+#line 27 "monoc.l"
+{ yylval.sval = symtab_insert(ts, yytext);
+                             return IDENT; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 26 "monoc.l"
+#line 29 "monoc.l"
 { return ATTRIB; }
 	YY_BREAK
 /*
@@ -876,7 +879,7 @@ YY_RULE_SETUP
  */
 case 16:
 YY_RULE_SETUP
-#line 49 "monoc.l"
+#line 52 "monoc.l"
 {
                               fprintf(stderr, "Error: '%s' is not recognized (line %d)\n", yytext, yylineno);
                               exit(1);
@@ -884,10 +887,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 53 "monoc.l"
+#line 56 "monoc.l"
 ECHO;
 	YY_BREAK
-#line 891 "lex.yy.c"
+#line 894 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1904,6 +1907,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 53 "monoc.l"
+#line 56 "monoc.l"
 
 

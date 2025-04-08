@@ -1,10 +1,13 @@
 %{
+#include "symtab.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 extern FILE *yyin;
 extern int yylineno;
+
+Symtab *ts; 
 
 int yylex();
 
@@ -15,7 +18,7 @@ void yyerror(char *msg){
 %}
 %union{
     int ival;
-    char *sval;
+    SymtabEntry *sval;
 }
 
 %token <ival> INTLITERAL 
@@ -52,7 +55,13 @@ expr:
     |   expr DIVIDE expr         { $$ = $1 / $3;} 
     |   LPAREN expr RPAREN       { $$ = $2; }   
     |   INTLITERAL               { $$ = $1; }
-    |   IDENT                    { $$ = strlen($1);}
+    |   IDENT                    { 
+                                    if(!$1->defined){
+                                        printf("%s not defined (line %d)\n", $1->key, yylineno);
+                                        exit(1);
+                                    }
+                                    $$ = $1->value;
+                                 }
         ;
 %%
 
@@ -66,7 +75,9 @@ int main(int argc, char **argv) {
         perror("Erro ao abrir o arquivo");
         exit(1);
     }
+    ts = symtab_create();
     yyparse();
     fclose(yyin);
+    symtab_destroy(ts);
     return 0;
 }

@@ -1,9 +1,11 @@
 %{
+#include "symtab.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "monoc.tab.h"
 
+extern Symtab *ts; 
 %}
 
 %option yylineno
@@ -22,7 +24,8 @@
 "/"                        { return DIVIDE; }
 "var"                      { return VARDEF; }
 "read"                     { return READ; }
-[A-Za-z][A-Za-z0-9_]*      { yylval.sval = strdup(yytext); return IDENT; }
+[A-Za-z][A-Za-z0-9_]*      { yylval.sval = symtab_insert(ts, yytext);
+                             return IDENT; }
 "="                        { return ATTRIB; }
 
  /*

@@ -69,12 +69,15 @@
 /* First part of user prologue.  */
 #line 1 "monoc.y"
 
+#include "symtab.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 extern FILE *yyin;
 extern int yylineno;
+
+Symtab *ts; 
 
 int yylex();
 
@@ -83,7 +86,7 @@ void yyerror(char *msg){
     exit(1);
 }
 
-#line 87 "monoc.tab.c"
+#line 90 "monoc.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -519,8 +522,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    34,    34,    36,    40,    44,    45,    49,    50,    51,
-      52,    53,    54,    55
+       0,    37,    37,    39,    43,    47,    48,    52,    53,    54,
+      55,    56,    57,    58
 };
 #endif
 
@@ -1093,61 +1096,67 @@ yyreduce:
   switch (yyn)
     {
   case 5: /* print: PRINT LPAREN expr RPAREN SEMICOLON  */
-#line 44 "monoc.y"
+#line 47 "monoc.y"
                                             { printf("%d\n", (yyvsp[-2].ival));}
-#line 1099 "monoc.tab.c"
+#line 1102 "monoc.tab.c"
     break;
 
   case 6: /* print: PRINT LPAREN RPAREN SEMICOLON  */
-#line 45 "monoc.y"
+#line 48 "monoc.y"
                                             { printf("\n"); }
-#line 1105 "monoc.tab.c"
+#line 1108 "monoc.tab.c"
     break;
 
   case 7: /* expr: expr PLUS expr  */
-#line 49 "monoc.y"
+#line 52 "monoc.y"
                                  { (yyval.ival) = (yyvsp[-2].ival) + (yyvsp[0].ival);}
-#line 1111 "monoc.tab.c"
+#line 1114 "monoc.tab.c"
     break;
 
   case 8: /* expr: expr MINUS expr  */
-#line 50 "monoc.y"
+#line 53 "monoc.y"
                                  { (yyval.ival) = (yyvsp[-2].ival) - (yyvsp[0].ival);}
-#line 1117 "monoc.tab.c"
+#line 1120 "monoc.tab.c"
     break;
 
   case 9: /* expr: expr TIMES expr  */
-#line 51 "monoc.y"
+#line 54 "monoc.y"
                                  { (yyval.ival) = (yyvsp[-2].ival) * (yyvsp[0].ival);}
-#line 1123 "monoc.tab.c"
+#line 1126 "monoc.tab.c"
     break;
 
   case 10: /* expr: expr DIVIDE expr  */
-#line 52 "monoc.y"
+#line 55 "monoc.y"
                                  { (yyval.ival) = (yyvsp[-2].ival) / (yyvsp[0].ival);}
-#line 1129 "monoc.tab.c"
+#line 1132 "monoc.tab.c"
     break;
 
   case 11: /* expr: LPAREN expr RPAREN  */
-#line 53 "monoc.y"
+#line 56 "monoc.y"
                                  { (yyval.ival) = (yyvsp[-1].ival); }
-#line 1135 "monoc.tab.c"
+#line 1138 "monoc.tab.c"
     break;
 
   case 12: /* expr: INTLITERAL  */
-#line 54 "monoc.y"
+#line 57 "monoc.y"
                                  { (yyval.ival) = (yyvsp[0].ival); }
-#line 1141 "monoc.tab.c"
+#line 1144 "monoc.tab.c"
     break;
 
   case 13: /* expr: IDENT  */
-#line 55 "monoc.y"
-                                 { (yyval.ival) = strlen((yyvsp[0].sval));}
-#line 1147 "monoc.tab.c"
+#line 58 "monoc.y"
+                                 { 
+                                    if(!(yyvsp[0].sval)->defined){
+                                        printf("%s not defined (line %d)\n", (yyvsp[0].sval)->key, yylineno);
+                                        exit(1);
+                                    }
+                                    (yyval.ival) = (yyvsp[0].sval)->value;
+                                 }
+#line 1156 "monoc.tab.c"
     break;
 
 
-#line 1151 "monoc.tab.c"
+#line 1160 "monoc.tab.c"
 
       default: break;
     }
@@ -1340,7 +1349,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 57 "monoc.y"
+#line 66 "monoc.y"
 
 
 int main(int argc, char **argv) {
@@ -1353,7 +1362,9 @@ int main(int argc, char **argv) {
         perror("Erro ao abrir o arquivo");
         exit(1);
     }
+    ts = symtab_create();
     yyparse();
     fclose(yyin);
+    symtab_destroy(ts);
     return 0;
 }

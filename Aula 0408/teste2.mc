@@ -6,7 +6,5 @@
 var a = 55;
 
 print(10 + a);
-
 print(media);
-
 print(aa * aaa + paralelepipedo);
