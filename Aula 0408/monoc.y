@@ -40,12 +40,18 @@ program:
     ;
 
 cmd:
-    print
+      print
+    | declaration
     ;
 
 print:
         PRINT LPAREN expr RPAREN SEMICOLON  { printf("%d\n", $3);}
     |   PRINT LPAREN RPAREN SEMICOLON       { printf("\n"); }
+    ;
+
+declaration:
+        VARDEF IDENT SEMICOLON              { $2->defined = 1; }
+    |   VARDEF IDENT ATTRIB expr SEMICOLON  { $2->defined = 1; $2->value = $4;}
     ;
 
 expr:
@@ -62,7 +68,7 @@ expr:
                                     }
                                     $$ = $1->value;
                                  }
-        ;
+    ;
 %%
 
 int main(int argc, char **argv) {
