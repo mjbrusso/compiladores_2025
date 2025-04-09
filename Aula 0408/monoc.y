@@ -60,6 +60,7 @@ expr:
     |   expr TIMES expr          { $$ = $1 * $3;}
     |   expr DIVIDE expr         { $$ = $1 / $3;} 
     |   LPAREN expr RPAREN       { $$ = $2; }   
+    |   READ LPAREN RPAREN       { int n; scanf("%d", &n); $$ = n; }
     |   INTLITERAL               { $$ = $1; }
     |   IDENT                    { 
                                     if(!$1->defined){
